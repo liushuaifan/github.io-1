@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>我的个人主页</title>
+  <meta name="description" content="这是我的个人主页 - 简短介绍、项目与联系方式" />
+
+  <style>
+    :root{
+      --bg: #f7f7f8;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+    }
+    [data-theme="dark"]{
+      --bg: #0b1220;
+      --card: #071029;
+      --text: #e6eef8;
+      --muted: #9aa6bd;
+      --accent: #60a5fa;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .container{
+      max-width:980px;
+      margin:32px auto;
+      padding:20px;
+    }
+
+    header{
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+    }
+
+    .profile{
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+
+    .avatar{
+      width:88px;
+      height:88px;
+      border-radius:14px;
+      object-fit:cover;
+      border:2px solid rgba(0,0,0,0.06);
+      background:linear-gradient(135deg,#eef2ff,#fff);
+    }
+
+    h1{margin:0;font-size:1.6rem;}
+    p.lead{margin:4px 0 0;color:var(--muted);}
+
+    .controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .btn{
+      background:var(--card);
+      border:1px solid rgba(0,0,0,0.06);
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      color:var(--text);
+      box-shadow:0 1px 0 rgba(255,255,255,0.2) inset;
+    }
+    .btn:active{transform:translateY(1px)}
+
+    main{
+      display:grid;
+      grid-template-columns: 1fr 320px;
+      gap:20px;
+      align-items:start;
+    }
+
+    @media (max-width:880px){
+      main{ grid-template-columns:1fr; }
+    }
+
+    .card{
+      background:var(--card);
+      padding:16px;
+      border-radius:12px;
+      box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+    }
+
+    .section-title{
+      margin:0 0 12px 0;
+      font-weight:600;
+      color:var(--text);
+    }
+
+    .skills{ display:flex; flex-wrap:wrap; gap:8px; }
+    .chip{
+      background:rgba(37,99,235,0.08);
+      color:var(--accent);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:0.9rem;
+    }
+
+    .projects{ display:flex; flex-direction:column; gap:10px; }
+    .proj{
+      padding:10px;
+      border-radius:8px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .proj h4{ margin:0 0 6px 0; font-size:1rem;}
+    .proj p{ margin:0; color:var(--muted); font-size:0.95rem;}
+
+    aside .card{ position:sticky; top:20px; }
+
+    footer{
+      margin-top:28px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    .contact-list{ display:flex; flex-direction:column; gap:8px; }
+    .contact-item{ display:flex; gap:8px; align-items:center; color:var(--muted); }
+    .small{ font-size:0.9rem; color:var(--muted); }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="page">
+    <header>
+      <div class="profile">
+        <!-- 把 avatar.jpg 换成你的头像文件名或图片 URL -->
+        <img src="avatar.jpg" alt="avatar" class="avatar" />
+        <div>
+          <h1>你的名字（例如：张三）</h1>
+          <p class="lead">高中生 · 编程爱好者 · Java / Python / 网页</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="download">下载简历</button>
+        <button class="btn" id="themeToggle">切换深色</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- 主内容 -->
+      <div>
+        <section class="card">
+          <h3 class="section-title">关于我</h3>
+          <p>你好！我是一名热爱编程的学生，喜欢做小项目和游戏。这个页面是我的个人主页示例，你可以把它作为课堂作业的模板，修改内容并发布到 GitHub Pages。</p>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h3 class="section-title">我的技能</h3>
+          <div class="skills">
+            <div class="chip">Java</div>
+            <div class="chip">Python</div>
+            <div class="chip">HTML/CSS</div>
+            <div class="chip">Pygame</div>
+            <div class="chip">Git</div>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h3 class="section-title">项目展示</h3>
+          <div class="projects">
+            <div class="proj">
+              <h4>抽卡小游戏（Java）</h4>
+              <p>控制台抽卡程序，包含卡池、概率与背包功能。适合课堂练习。</p>
+            </div>
+            <div class="proj">
+              <h4>一维躲避障碍（Python）</h4>
+              <p>文字版跑酷游戏，使用类与列表管理障碍与玩家状态。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top:14px">
+          <h3 class="section-title">博客 / 笔记</h3>
+          <p class="small">最近的学习笔记：</p>
+          <ul class="small">
+            <li>如何用 ArrayList 存卡片并统计稀有度</li>
+            <li>用 Python 快速做游戏原型（Pygame 简介）</li>
+            <li>GitHub Pages 发布静态网页</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- 侧边栏 -->
+      <aside>
+        <div class="card">
+          <h3 class="section-title">联系方式</h3>
+          <div class="contact-list">
+            <div class="contact-item">📧 example@mail.com</div>
+            <div class="contact-item">🐙 GitHub: <a href="https://github.com/yourname" target="_blank">yourname</a></div>
+            <div class="contact-item">💬 WeChat: your_wechat_id</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 class="section-title">一句话介绍</h3>
+          <p class="small">“喜欢把想法用代码实现，喜欢把复杂问题变简单。”</p>
+        </div>
+      </aside>
+
+    </main>
+
+    <footer>
+      © 2025 你的名字 — 写给学习编程的你
+    </footer>
+  </div>
+
+  <script>
+    // 主题切换（浅色 / 深色）
+    (function(){
+      var themeBtn = document.getElementById('themeToggle');
+      var page = document.getElementById('page');
+      var dark = false;
+      themeBtn.addEventListener('click', function(){
+        dark = !dark;
+        if (dark) {
+          document.documentElement.setAttribute('data-theme','dark');
+          themeBtn.textContent = '切换浅色';
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+          themeBtn.textContent = '切换深色';
+        }
+      });
+
+      // 下载简历（示例：这里会创建一个简单文本文件）
+      var dbtn = document.getElementById('download');
+      dbtn.addEventListener('click', function(){
+        var content = "姓名：你的名字\\nEmail：example@mail.com\\n简介：在此填写简历摘要";
+        var blob = new Blob([content], {type: 'text/plain'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'resume.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    })();
+  </script>
+</body>
+</html>
