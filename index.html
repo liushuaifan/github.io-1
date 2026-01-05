@@ -1,261 +1,258 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>我的个人主页</title>
-  <meta name="description" content="这是我的个人主页 - 简短介绍、项目与联系方式" />
+    <meta charset="UTF-8">
+    <title>校园科技节 | School Activity</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --bg: #f7f7f8;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --accent: #2563eb;
-    }
-    [data-theme="dark"]{
-      --bg: #0b1220;
-      --card: #071029;
-      --text: #e6eef8;
-      --muted: #9aa6bd;
-      --accent: #60a5fa;
-    }
+    <style>
+        /* ====== 全局样式 ====== */
+        body {
+            margin: 0;
+            font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:var(--bg);
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.5;
-    }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    .container{
-      max-width:980px;
-      margin:32px auto;
-      padding:20px;
-    }
+        /* ====== 顶部导航 ====== */
+        header {
+            background-color: #1f3c88;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    header{
-      display:flex;
-      gap:20px;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:18px;
-    }
+        header h1 {
+            font-size: 20px;
+            margin: 0;
+        }
 
-    .profile{
-      display:flex;
-      gap:16px;
-      align-items:center;
-    }
+        nav a {
+            margin-left: 20px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
 
-    .avatar{
-      width:88px;
-      height:88px;
-      border-radius:14px;
-      object-fit:cover;
-      border:2px solid rgba(0,0,0,0.06);
-      background:linear-gradient(135deg,#eef2ff,#fff);
-    }
+        nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
 
-    h1{margin:0;font-size:1.6rem;}
-    p.lead{margin:4px 0 0;color:var(--muted);}
+        /* ====== Banner ====== */
+        .banner {
+            background: linear-gradient(to right, #1f3c88, #3a6cf4);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+        }
 
-    .controls{
-      display:flex;
-      gap:10px;
-      align-items:center;
-    }
+        .banner h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
 
-    .btn{
-      background:var(--card);
-      border:1px solid rgba(0,0,0,0.06);
-      padding:8px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      color:var(--text);
-      box-shadow:0 1px 0 rgba(255,255,255,0.2) inset;
-    }
-    .btn:active{transform:translateY(1px)}
+        .banner p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
 
-    main{
-      display:grid;
-      grid-template-columns: 1fr 320px;
-      gap:20px;
-      align-items:start;
-    }
+        /* ====== 通用区块 ====== */
+        section {
+            padding: 60px 40px;
+            max-width: 1100px;
+            margin: auto;
+        }
 
-    @media (max-width:880px){
-      main{ grid-template-columns:1fr; }
-    }
+        section h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1f3c88;
+        }
 
-    .card{
-      background:var(--card);
-      padding:16px;
-      border-radius:12px;
-      box-shadow: 0 6px 18px rgba(16,24,40,0.04);
-    }
+        /* ====== 活动介绍 ====== */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
 
-    .section-title{
-      margin:0 0 12px 0;
-      font-weight:600;
-      color:var(--text);
-    }
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
 
-    .skills{ display:flex; flex-wrap:wrap; gap:8px; }
-    .chip{
-      background:rgba(37,99,235,0.08);
-      color:var(--accent);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:0.9rem;
-    }
+        .info-card h4 {
+            margin-top: 0;
+            color: #3a6cf4;
+        }
 
-    .projects{ display:flex; flex-direction:column; gap:10px; }
-    .proj{
-      padding:10px;
-      border-radius:8px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
-      border:1px solid rgba(0,0,0,0.03);
-    }
-    .proj h4{ margin:0 0 6px 0; font-size:1rem;}
-    .proj p{ margin:0; color:var(--muted); font-size:0.95rem;}
+        /* ====== 活动流程 ====== */
+        .timeline {
+            border-left: 4px solid #3a6cf4;
+            padding-left: 30px;
+            margin-top: 30px;
+        }
 
-    aside .card{ position:sticky; top:20px; }
+        .event {
+            margin-bottom: 30px;
+        }
 
-    footer{
-      margin-top:28px;
-      color:var(--muted);
-      font-size:0.9rem;
-      text-align:center;
-    }
+        .event span {
+            font-weight: bold;
+            color: #3a6cf4;
+        }
 
-    .contact-list{ display:flex; flex-direction:column; gap:8px; }
-    .contact-item{ display:flex; gap:8px; align-items:center; color:var(--muted); }
-    .small{ font-size:0.9rem; color:var(--muted); }
-  </style>
+        /* ====== 报名区域 ====== */
+        .register {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .register p {
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #3a6cf4;
+            color: white;
+            border-radius: 30px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2d54c9;
+        }
+
+        /* ====== 页脚 ====== */
+        footer {
+            background-color: #1f3c88;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+    </style>
 </head>
+
 <body>
 
-  <div class="container" id="page">
-    <header>
-      <div class="profile">
-        <!-- 把 avatar.jpg 换成你的头像文件名或图片 URL -->
-        <img src="avatar.jpg" alt="avatar" class="avatar" />
-        <div>
-          <h1>你的名字（例如：张三）</h1>
-          <p class="lead">高中生 · 编程爱好者 · Java / Python / 网页</p>
-        </div>
-      </div>
+<!-- ====== 导航 ====== -->
+<header>
+    <h1>XX中学 · 校园科技节</h1>
+    <nav>
+        <a href="#home">首页</a>
+        <a href="#about">活动介绍</a>
+        <a href="#schedule">活动流程</a>
+        <a href="#register">报名信息</a>
+    </nav>
+</header>
 
-      <div class="controls">
-        <button class="btn" id="download">下载简历</button>
-        <button class="btn" id="themeToggle">切换深色</button>
-      </div>
-    </header>
+<!-- ====== 首页 Banner ====== -->
+<div class="banner" id="home">
+    <h2>校园科技节 2026</h2>
+    <p>探索科技 · 创造未来 · 用代码改变世界</p>
+</div>
 
-    <main>
-      <!-- 主内容 -->
-      <div>
-        <section class="card">
-          <h3 class="section-title">关于我</h3>
-          <p>你好！我是一名热爱编程的学生，喜欢做小项目和游戏。这个页面是我的个人主页示例，你可以把它作为课堂作业的模板，修改内容并发布到 GitHub Pages。</p>
-        </section>
+<!-- ====== 活动介绍 ====== -->
+<section id="about">
+    <h3>活动介绍</h3>
+    <p>
+        校园科技节是我校一年一度的重要活动，旨在激发学生对科学与技术的兴趣，
+        提升创新能力与实践能力。本次活动将融合编程、人工智能、工程设计与创意展示，
+        为同学们提供一个展示自我与交流学习的平台。
+    </p>
 
-        <section class="card" style="margin-top:14px">
-          <h3 class="section-title">我的技能</h3>
-          <div class="skills">
-            <div class="chip">Java</div>
-            <div class="chip">Python</div>
-            <div class="chip">HTML/CSS</div>
-            <div class="chip">Pygame</div>
-            <div class="chip">Git</div>
-          </div>
-        </section>
-
-        <section class="card" style="margin-top:14px">
-          <h3 class="section-title">项目展示</h3>
-          <div class="projects">
-            <div class="proj">
-              <h4>抽卡小游戏（Java）</h4>
-              <p>控制台抽卡程序，包含卡池、概率与背包功能。适合课堂练习。</p>
-            </div>
-            <div class="proj">
-              <h4>一维躲避障碍（Python）</h4>
-              <p>文字版跑酷游戏，使用类与列表管理障碍与玩家状态。</p>
-            </div>
-          </div>
-        </section>
-
-        <section class="card" style="margin-top:14px">
-          <h3 class="section-title">博客 / 笔记</h3>
-          <p class="small">最近的学习笔记：</p>
-          <ul class="small">
-            <li>如何用 ArrayList 存卡片并统计稀有度</li>
-            <li>用 Python 快速做游戏原型（Pygame 简介）</li>
-            <li>GitHub Pages 发布静态网页</li>
-          </ul>
-        </section>
-      </div>
-
-      <!-- 侧边栏 -->
-      <aside>
-        <div class="card">
-          <h3 class="section-title">联系方式</h3>
-          <div class="contact-list">
-            <div class="contact-item">📧 example@mail.com</div>
-            <div class="contact-item">🐙 GitHub: <a href="https://github.com/yourname" target="_blank">yourname</a></div>
-            <div class="contact-item">💬 WeChat: your_wechat_id</div>
-          </div>
+    <div class="info-grid">
+        <div class="info-card">
+            <h4>📅 活动时间</h4>
+            <p>2026 年 4 月 20 日（周一）</p>
         </div>
 
-        <div class="card" style="margin-top:12px">
-          <h3 class="section-title">一句话介绍</h3>
-          <p class="small">“喜欢把想法用代码实现，喜欢把复杂问题变简单。”</p>
+        <div class="info-card">
+            <h4>📍 活动地点</h4>
+            <p>学校体育馆 & 信息技术楼</p>
         </div>
-      </aside>
 
-    </main>
+        <div class="info-card">
+            <h4>👨‍🎓 参与对象</h4>
+            <p>全体在校学生（欢迎组队）</p>
+        </div>
 
-    <footer>
-      © 2025 你的名字 — 写给学习编程的你
-    </footer>
-  </div>
+        <div class="info-card">
+            <h4>⭐ 活动亮点</h4>
+            <p>编程挑战 · 科技作品展 · 互动体验区</p>
+        </div>
+    </div>
+</section>
 
-  <script>
-    // 主题切换（浅色 / 深色）
-    (function(){
-      var themeBtn = document.getElementById('themeToggle');
-      var page = document.getElementById('page');
-      var dark = false;
-      themeBtn.addEventListener('click', function(){
-        dark = !dark;
-        if (dark) {
-          document.documentElement.setAttribute('data-theme','dark');
-          themeBtn.textContent = '切换浅色';
-        } else {
-          document.documentElement.removeAttribute('data-theme');
-          themeBtn.textContent = '切换深色';
-        }
-      });
+<!-- ====== 活动流程 ====== -->
+<section id="schedule">
+    <h3>活动流程</h3>
 
-      // 下载简历（示例：这里会创建一个简单文本文件）
-      var dbtn = document.getElementById('download');
-      dbtn.addEventListener('click', function(){
-        var content = "姓名：你的名字\\nEmail：example@mail.com\\n简介：在此填写简历摘要";
-        var blob = new Blob([content], {type: 'text/plain'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'resume.txt';
-        a.click();
-        URL.revokeObjectURL(url);
-      });
-    })();
-  </script>
+    <div class="timeline">
+        <div class="event">
+            <span>09:00 - 09:30</span>
+            <p>开幕式 & 嘉宾致辞</p>
+        </div>
+
+        <div class="event">
+            <span>09:30 - 11:30</span>
+            <p>编程与科技挑战赛</p>
+        </div>
+
+        <div class="event">
+            <span>13:00 - 15:00</span>
+            <p>学生科技作品展示</p>
+        </div>
+
+        <div class="event">
+            <span>15:30 - 16:30</span>
+            <p>评选与颁奖仪式</p>
+        </div>
+    </div>
+</section>
+
+<!-- ====== 报名信息 ====== -->
+<section id="register">
+    <div class="register">
+        <h3>报名方式</h3>
+        <p>
+            请各班同学以个人或小组形式报名，填写报名表并提交作品简介。
+            报名截止日期：<strong>2026 年 4 月 10 日</strong>
+        </p>
+
+        <p>
+            联系老师：信息技术组<br>
+            联系邮箱：tech@school.edu
+        </p>
+
+        <a href="#" class="btn">立即报名</a>
+    </div>
+</section>
+
+<!-- ====== 页脚 ====== -->
+<footer>
+    © 2026 XX中学 | 校园科技节官方网站
+</footer>
+
 </body>
 </html>
